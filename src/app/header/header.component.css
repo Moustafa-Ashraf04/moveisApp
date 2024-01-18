@@ -1,0 +1,15 @@
+.navbar {
+  background-color: #ffe353;
+}
+svg {
+  cursor: default;
+}
+a {
+  margin-left: 10px;
+}
+.navbar-brand {
+  margin-left: 12px;
+}
+.active_link {
+  color: #86751f;
+}

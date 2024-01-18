@@ -1,0 +1,24 @@
+button {
+  background-color: #ffe353;
+  cursor: pointer;
+  font-weight: 500;
+}
+input {
+  width: 90%;
+}
+#search-Container {
+  background-color: #f3f1f1;
+}
+button:hover {
+  background-color: #ffe353;
+}
+h2 {
+    font-weight: 700;
+}
+input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+button {
+  margin-left: 15px;
+}
