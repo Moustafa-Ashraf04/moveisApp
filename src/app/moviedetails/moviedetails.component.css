@@ -9,3 +9,6 @@
   gap: 20px;
   margin-left: 20px;
 }
+#wishlist-icon {
+  cursor: pointer;
+}

@@ -22,13 +22,29 @@
     style="
       padding-right: 50px;
       padding-left: 50px;
-      width: 55%;
-      margin-right: 140px;
+      width: 60%;
+      margin-right: 100px;
     "
     id="details"
   >
     <div class="pt-3">
-      <h1>{{ details.title }} {{ details.id }}</h1>
+      <div class="d-flex justify-content-between">
+        <h1>{{ details.title }} {{ details.id }}</h1>
+        <a (click)="preventHeartClick($event)" id="wishlist-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            height="26px"
+            width="30px"
+            (click)="changeFillColor()"
+          >
+            <path
+              [style.fill]="fillColor"
+              d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
+            />
+          </svg>
+        </a>
+      </div>
       <P class="mb-4">{{ details.release_date }}</P>
       <!-- the rating and vote average   -->
       <div class="d-flex align-items-center">
@@ -53,13 +69,13 @@
     </div>
     <!-- movie description , genres , language , production_company and website  -->
     <div>
-      <p class="fs-4 mt-4">
+      <p class="fs-5 mt-4">
         {{ details.overview }}
       </p>
       <div
         *ngIf="details.genres && details.genres.length > 0"
         id="buttonsthree"
-        class="mb-5"
+        class="mb-3"
       >
         <button *ngFor="let genre of details.genres" type="button" class="btn">
           {{ genre.name }}
@@ -114,7 +130,7 @@
                 details.production_companies[0].logo_path
               "
               alt=""
-              style="border-radius: 15px"
+              style="border-radius: 15px; max-width: 700px; max-height: 160px"
             />
           </a>
         </div>

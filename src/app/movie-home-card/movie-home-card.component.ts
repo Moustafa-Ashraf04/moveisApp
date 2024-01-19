@@ -25,8 +25,8 @@ export class MovieHomeCardComponent {
     this.fillColor = this.fillColor === '#000000' ? '#ffe353' : '#000000';
   }
 
-  // disable the anchor tag click
-  prevent(event: Event): void {
-    event.preventDefault();
+  preventHeartClick(event: Event): void {
+    // Prevent the click event from propagating to the card
+    event.stopPropagation();
   }
 }

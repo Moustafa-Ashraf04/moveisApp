@@ -85,4 +85,16 @@ export class MoviedetailsComponent implements OnInit {
   ariaValueText(current: number, max: number) {
     return `${current} out of ${max} hearts`;
   }
+
+  // to change color of the heart icon once added to the watch list and change it back when clicked again
+  fillColor: string = '#000000';
+
+  changeFillColor(): void {
+    this.fillColor = this.fillColor === '#000000' ? '#ffe353' : '#000000';
+  }
+
+  preventHeartClick(event: Event): void {
+    // Prevent the click event from propagating to the card
+    event.stopPropagation();
+  }
 }

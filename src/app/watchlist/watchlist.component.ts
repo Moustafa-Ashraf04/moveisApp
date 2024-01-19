@@ -9,4 +9,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './watchlist.component.html',
   styleUrl: './watchlist.component.css',
 })
-export class WatchlistComponent {}
+export class WatchlistComponent {
+  watchlistMovies: any[] = [];
+}
