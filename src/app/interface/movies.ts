@@ -13,9 +13,3 @@ export interface Movie {
   voteaverage: Number;
   vote_count: Number;
 }
-// export interface MovieApiResponse {
-//   page: number;
-//   results: Movie[];
-//   total_pages: number;
-//   total_results: number;
-// }
