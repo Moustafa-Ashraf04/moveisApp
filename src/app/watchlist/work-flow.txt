@@ -1,0 +1,12 @@
+1--> if you click on favorite icon it will send data (movie id) from child (movie home card) to parent (movies home list) using (output)
+2--> then transfer id from parent (movie home list) to child (movie watchlist page) using (input)
+3--> and in (movie watchlist page) add id in array 
+4--> I think I will add the array to the interceptor
+5--> transfer the data to the (movie watchlist card)
+card should conrain {image on left, title, favorite icon beside title on same row, rating, number of rating persons, part of description}
+6--> for loop in (movie watchlist page) to display the cards
+7--> there is an @if(array.length){
+                    @for((movie watchlist cards))
+                }@else{
+                    there is no movies in watch list
+                }
