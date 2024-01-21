@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-// import { RatingproggressbarComponent } from "../ratingproggressbar/ratingproggressbar.component";
 import { PercentScalePipe } from '../pipes/percent-scale.pipe';
 
 @Component({

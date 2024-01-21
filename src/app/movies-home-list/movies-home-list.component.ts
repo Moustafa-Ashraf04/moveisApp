@@ -27,9 +27,6 @@ export class MoviesHomeListComponent implements OnInit {
 
   moviesList: Movie[] = [];
 
-  // not used
-  // movie: any;
-
   ngOnInit() {
     this.apiResponse.getMoviesList(this.page).subscribe((res: any) => {
       console.log(res);
@@ -39,5 +36,13 @@ export class MoviesHomeListComponent implements OnInit {
   }
 
   // initial value for the pagination bar
-  page = 4;
+  page: number = 1;
+
+  changepage(newPage: number) {
+    this.apiResponse.getMoviesList(newPage).subscribe((res: any) => {
+      console.log(res);
+      this.moviesList = res.results;
+      console.log(res.results);
+    });
+  }
 }

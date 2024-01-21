@@ -23,7 +23,10 @@
   <h2 style="width: 100%">Popular Movies</h2>
 
   <div class="row m-1 justify-content-center">
-    <div class="col-lg-2 col-md-4 col-sm-12" *ngFor="let movie of moviesList">
+    <div
+      class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12"
+      *ngFor="let movie of moviesList"
+    >
       <app-movie-home-card [movie]="movie">
         <a [routerLink]="['/details', movie.id]"></a
       ></app-movie-home-card>
@@ -32,32 +35,14 @@
 </div>
 
 <!-- ######   this is pagination bar only for display ####### 
-  we can change the value of collectionsize to res.totalpages but cant do it now
 -->
 <div class="d-flex flex-column align-items-center">
   <ngb-pagination
-    [collectionSize]="60"
+    [collectionSize]="400"
     [(page)]="page"
     [boundaryLinks]="true"
+    (click)="changepage(page)"
   />
 
-  <pre>Current page: {{ page }}</pre>
+  <!-- <pre>Current page: {{ page }}</pre> -->
 </div>
-<!-- 
-  pagination buttons bootstrap might be used later
-  <hr />
-<nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="#">2</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav> -->

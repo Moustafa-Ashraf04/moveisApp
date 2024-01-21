@@ -22,8 +22,8 @@ export class ApiResponseService {
   //
   //  #####################################
   // to try on it the pagination
-  getMoviesList(page: number): Observable<Movie> {
-    const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&page=1`;
+  getMoviesList(pageNum: number): Observable<Movie> {
+    const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&page=${pageNum}`;
     return this.http.get<Movie>(apiUrl);
   }
 
@@ -32,8 +32,8 @@ export class ApiResponseService {
     return this.http.get<Movie>(apiUrl);
   }
 
-  getMovieRecommends(movieId: number): Observable<Movie> {
+  getMovieRecommends(movieId: number): Observable<any> {
     const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${this.apiKey}`;
-    return this.http.get<Movie>(apiUrl);
+    return this.http.get<any>(apiUrl);
   }
 }

@@ -21,7 +21,6 @@ export const routes: Routes = [
     component: MoviedetailsComponent,
     title: 'movie details',
   },
-
   {
     path: '**',
     component: NotFoundComponent,

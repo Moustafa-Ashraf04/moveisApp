@@ -1,20 +1,13 @@
 <!-- movie details page  -->
-<div class="container-fliud m-5 p-3 d-flex" style="height: 75vh">
+<div class="container-fliud m-5 p-3 d-flex col-11" style="height: 75vh">
   <!-- movie poster  -->
-  <div
-    class=""
-    style="
-      padding-right: 40px;
-      padding-left: 40px;
-      width: 30%;
-      margin-left: 100px;
-    "
-  >
+  <div class="col-4 ml-5 d-flex justify-content-end">
+    <!-- style="padding-right: 40px; padding-left: 40px;" -->
     <img
       *ngIf="details.poster_path"
       [src]="'https://image.tmdb.org/t/p/w500/' + details.poster_path"
       alt=""
-      class="w-100 h-100"
+      class="h-100"
       style="border-radius: 15px"
     />
     <img
@@ -26,18 +19,14 @@
   </div>
   <!-- movie information  -->
   <div
-    style="
-      padding-right: 50px;
-      padding-left: 50px;
-      width: 60%;
-      margin-right: 100px;
-    "
+    style="padding-right: 50px; padding-left: 50px; margin-right: 100px"
     id="details"
+    class="col-7"
   >
     <div class="pt-3">
       <div class="d-flex justify-content-between">
-        <h1>{{ details.title }} ({{ details.id }})</h1>
-        <a (click)="preventHeartClick($event)" id="wishlist-icon" >
+        <h1>{{ details.title }}</h1>
+        <a (click)="preventHeartClick($event)" id="wishlist-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -72,7 +61,7 @@
         </ng-container>
         <pre
           class="m-0"
-        ><b class="d-flex align-items-center justify-content-center" style="padding-left: 25px; font-size: 15px;">{{ details.vote_average | removeDot }}</b></pre>
+        ><b class="d-flex align-items-center justify-content-center px-3 fs-2">{{ details.vote_average | percentScale }}</b></pre>
       </div>
     </div>
     <!-- movie description , genres , language , production_company and website  -->
@@ -92,9 +81,7 @@
 
       <div class="d-flex align-items-between flex-column">
         <div class="fs-5 fw-bold">
-          <span style="margin-right: 25px"
-            >Duration: {{ details.runtime }} Mins.</span
-          >
+          <span class="mx-3">Duration: {{ details.runtime }} Mins.</span>
           <span
             *ngIf="
               details.spoken_languages && details.spoken_languages.length > 0
@@ -108,19 +95,6 @@
             </ng-container>
           </span>
         </div>
-        <!-- if we want to show all of them but it will take big space in the page
-          <div class="my-4">
-          <ng-container *ngFor="let company of details.production_companies">
-            <a>
-              <img
-                [src]="'https://image.tmdb.org/t/p/w500/' + company.logo_path"
-                alt=""
-                style="border-radius: 15px"
-              />
-            </a>
-          </ng-container>
-        </div> 
-      -->
         <div class="my-4">
           <a>
             <img
@@ -129,7 +103,7 @@
                 details.production_companies[0].logo_path
               "
               alt=""
-              style="border-radius: 15px; max-width: 700px; max-height: 160px"
+              style="max-width: 700px; max-height: 160px"
             />
           </a>
         </div>
@@ -174,11 +148,11 @@
 <!-- here will be the recommendations part shows only 12 cards -->
 
 <div class="m-4 mt-5">
-  <h2 style="width: 100%">Recommendations</h2>
+  <h2 class="w-100">Recommendations</h2>
 
   <div class="row m-1 justify-content-center">
     <div
-      class="col-lg-2 col-md-4 col-sm-12"
+      class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12"
       *ngFor="let movie of recommendations | slice : 0 : 12"
     >
       <app-movie-home-card [movie]="movie">
@@ -187,18 +161,3 @@
     </div>
   </div>
 </div>
-<!-- here will be the recommendations part  (older code)-->
-<!-- <div class="m-4 mt-5">
-  <h2 style="width: 100%">Recommendations</h2>
-
-  <div class="row m-1 justify-content-center">
-    <div
-      class="col-lg-2 col-md-4 col-sm-12"
-      *ngFor="let movie of recommendations"
-    >
-      <app-movie-home-card [movie]="movie">
-        <a [routerLink]="['/details', movie.id]"></a
-      ></app-movie-home-card>
-    </div>
-  </div>
-</div> -->

@@ -31,49 +31,36 @@ export class MoviedetailsComponent implements OnInit {
     private router: Router
   ) {}
 
-  // ########
-  // not used
-  // id: any;
-  // movieId: string | null = null;
-  // $svg: any;
-  // times: any;
-  // res: any;
-  // moviesList: any;
-  // recommends: any;
-  // movieId: string;
-  // Movie: any;
-  // details: MovieDetails[] = [];
-  // ########
-
   details: any;
+  id!: number;
   recommendations: Movie[] = [];
 
   ngOnInit(): void {
     // Extract movie ID from the URL
-    const movieIdParam = this.route.snapshot.paramMap.get('id');
-    // Check if movieIdParam is not null
-    if (movieIdParam !== null) {
-      // Convert movieIdParam to a number
-      const movieId = +movieIdParam;
-
-      // Call the first API
-      this.apiResponse.getMovieDetails(movieId).subscribe((details: any) => {
+    this.route.params.subscribe((params) => {
+      this.id = parseInt(params['id']);
+      this.apiResponse.getMovieDetails(this.id).subscribe((details) => {
         // Handle the details API response here
         this.details = details;
-        console.log('Details:', details);
       });
+      this.apiResponse.getMovieRecommends(this.id).subscribe((recommends) => {
+        // Handle the recommendations API response here
+        this.recommendations = recommends.results;
+      });
+    });
 
-      // Call the second API
-      this.apiResponse
-        .getMovieRecommends(movieId)
-        .subscribe((recommends: any) => {
-          // Handle the recommendations API response here
-          this.recommendations = recommends.results;
-          console.log('Recommendations:', recommends);
-        });
-    } else {
-      console.error('Invalid movie ID');
-    }
+
+    // Call the first API
+    this.apiResponse.getMovieDetails(this.id).subscribe((details) => {
+      // Handle the details API response here
+      this.details = details;
+    });
+
+    // Call the second API
+    this.apiResponse.getMovieRecommends(this.id).subscribe((recommends) => {
+      // Handle the recommendations API response here
+      this.recommendations = recommends.results;
+    });
   }
 
   getFilledStarsCount(vote_average: number): number {
@@ -93,7 +80,7 @@ export class MoviedetailsComponent implements OnInit {
     event.stopPropagation();
   }
 
-  navigateToDetails(movieId: number): void {
-    this.router.navigate(['/movie-details', movieId]);
-  }
+  // navigateToDetails(detailsId: number): void {
+  //   this.router.navigate([`/movie-details/ ${detailsId}`]);
+  // }
 }
