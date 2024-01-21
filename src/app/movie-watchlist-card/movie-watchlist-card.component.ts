@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Movie } from '../interface/movies';
+import { LimitOverviewPipe } from '../limit-overview.pipe';
 
 @Component({
   selector: 'app-movie-watchlist-card',
   standalone: true,
-  imports: [],
+  imports: [LimitOverviewPipe],
   templateUrl: './movie-watchlist-card.component.html',
   styleUrl: './movie-watchlist-card.component.css'
 })

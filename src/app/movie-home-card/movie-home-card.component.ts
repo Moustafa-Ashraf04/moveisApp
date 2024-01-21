@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FavoriteServiceService } from '../services/favorite-service.service';
+import { Movie } from '../interface/movies';
 
 @Component({
   selector: 'app-movie-home-card',
@@ -16,7 +18,14 @@ export class MovieHomeCardComponent {
 
   @Output() sendToParent = new EventEmitter<string>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private watchlistService : FavoriteServiceService) {}
+  private movieWatchList! : Movie[];
+
+  ngOnInit(){
+    this.watchlistService.getFavorite().subscribe(val => this.movieWatchList=val)
+  }
+
+  
 
   // to change color of the heart icon once added to the watch list and change it back when clicked again
   fillColor: string = '#000000';
@@ -28,5 +37,9 @@ export class MovieHomeCardComponent {
   preventHeartClick(event: Event): void {
     // Prevent the click event from propagating to the card
     event.stopPropagation();
+    console.log(this.movie);
+    this.movieWatchList.push(this.movie);
+    console.log("movieWatchList : "+ this.movieWatchList)
+    this.watchlistService.setFavorite(this.movieWatchList)
   }
 }
