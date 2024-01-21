@@ -11,8 +11,9 @@ export interface Movie {
   release_date: string;
   title: string;
   video: boolean;
-  voteaverage: Number;
+  vote_average: Number;
   vote_count: Number;
+  is_favorite? : Boolean;
 }
 export interface MovieApiResponse {
   page: number;

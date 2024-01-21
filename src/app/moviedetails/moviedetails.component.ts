@@ -8,6 +8,8 @@ import { routes } from './../app.routes';
 import { Movie, MovieDetails } from './../interface/movies';
 import { PercentScalePipe } from '../pipes/percent-scale.pipe';
 import { RemoveDotPipe } from '../pipes/remove-dot.pipe';
+import { FavoriteColorService } from '../services/favorite-color.service';
+import { FavoriteServiceService } from '../services/favorite-service.service';
 
 @Component({
   selector: 'app-moviedetails',
@@ -28,7 +30,8 @@ export class MoviedetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiResponse: ApiResponseService,
-    private router: Router
+    private router: Router,    private watchlistService : FavoriteServiceService, private color : FavoriteColorService
+
   ) {}
 
   details: any;
@@ -48,6 +51,9 @@ export class MoviedetailsComponent implements OnInit {
         this.recommendations = recommends.results;
       });
     });
+    this.watchlistService.getFavorite().subscribe(val => this.movieWatchList=val);
+  }
+
 
 
     // Call the first API
@@ -63,6 +69,8 @@ export class MoviedetailsComponent implements OnInit {
     });
   }
 
+  private movieWatchList! : Movie[];
+  // to change color of the heart icon once added to the watch list and change it back when clicked again
   getFilledStarsCount(vote_average: number): number {
     // Calculate the number of filled stars based on the rating
     return Math.round((vote_average / 100) * 5);
@@ -78,6 +86,16 @@ export class MoviedetailsComponent implements OnInit {
   preventHeartClick(event: Event): void {
     // Prevent the click event from propagating to the card
     event.stopPropagation();
+    console.log(this.details);
+    if (!this.movieWatchList.some(m => m.id === this.details.id)) {
+      this.movieWatchList.push(this.details);
+      this.color.setFillColor("#ffe353");
+    } else {
+      this.movieWatchList = this.movieWatchList.filter(m => m.id !== this.details.id);
+      this.color.setFillColor("#000");
+    }
+
+    this.watchlistService.setFavorite(this.movieWatchList);
   }
 
   // navigateToDetails(detailsId: number): void {

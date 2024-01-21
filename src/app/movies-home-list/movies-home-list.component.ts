@@ -35,6 +35,7 @@ export class MoviesHomeListComponent implements OnInit {
     });
   }
 
+
   // initial value for the pagination bar
   page: number = 1;
 
