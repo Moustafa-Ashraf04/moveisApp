@@ -1,4 +1,5 @@
 export interface Movie {
+vote_average: number;
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -52,7 +53,7 @@ export interface MovieDetails {
   tagline: string;
   title: string;
   video: boolean;
-  vote_average: number;
+  vote_average: Number;
   vote_count: number;
 }
 
