@@ -34,8 +34,6 @@ export class MovieHomeCardComponent {
   changeFillColor(){
     this.color.getFillColor().subscribe(val => this.fillColor=val)
   }
-  
-  
 
   preventHeartClick(event: Event): void {
     // Prevent the click event from propagating to the card
