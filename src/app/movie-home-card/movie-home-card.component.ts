@@ -48,13 +48,6 @@ export class MovieHomeCardComponent {
     }
 
     this.watchlistService.setFavorite(this.movieWatchList);
-    
-    
-    // this.movieWatchList = this.movieWatchList.map(m => ({...m, is_favorite:true}));
-    // console.log(this.movieWatchList);
-    // this.movieWatchList.map(m => console.log(m.is_favorite));
-    // console.log(this.movieWatchList[0].is_favorite);
   }
 
-  // console.log(movieWatchList[0].is_favorite);
 }

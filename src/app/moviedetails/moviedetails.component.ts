@@ -43,28 +43,7 @@ export class MoviedetailsComponent implements OnInit {
     private watchlistService : FavoriteServiceService, private color : FavoriteColorService
   ) {}
   details: any;
-
-  // ignore this for now
-  //
-  // ngOnInit(): void {
-  //   // // Subscribe to route parameter changes
-  //   // this.route.params.subscribe((params) => {
-  //   //   // Retrieve the movie ID from the route parameters
-  //   //   this.movieId = params['id'];
-  //   // });
-
-  //   // this.detailsService.getMovieDetails().subscribe((res: any) => {
-  //   //   console.log(res); // Check the structure of the API response
-  //   //   this.details = res;
-  //   // });
-  //   this.route.paramMap.subscribe((params) => {
-  //     const movieId = params.get('id');
-  //     // Now, use movieId to fetch details
-  //     this.detailsService
-  //       .getMovieDetails(movieId)
-  //       .subscribe((data) => (this.details = data));
-  //   });
-  // }
+  
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const movieId = params.get('id');

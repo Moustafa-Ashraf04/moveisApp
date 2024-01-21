@@ -87,15 +87,6 @@
           <span style="margin-right: 25px"
             >Duration: {{ details.runtime }} Mins.</span
           >
-          <!-- <span>Languages: {{ details.spoken_languages[0].name }}</span> -->
-          <!-- <span
-            >Languages:
-            <ng-container
-              *ngFor="let language of details.spoken_languages; let last = last"
-            >
-              {{ language.name }}{{ !last ? ", " : "" }}
-            </ng-container>
-          </span> -->
           <span
             *ngIf="
               details.spoken_languages && details.spoken_languages.length > 0
@@ -109,19 +100,6 @@
             </ng-container>
           </span>
         </div>
-        <!-- if we want to show all of them but it will take big space in the page
-                   <div class="my-4">
-          <ng-container *ngFor="let company of details.production_companies">
-            <a>
-              <img
-                [src]="'https://image.tmdb.org/t/p/w500/' + company.logo_path"
-                alt=""
-                style="border-radius: 15px"
-              />
-            </a>
-          </ng-container>
-        </div> 
-      -->
         <div class="my-4">
           <a>
             <img
