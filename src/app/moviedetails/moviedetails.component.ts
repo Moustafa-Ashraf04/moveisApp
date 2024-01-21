@@ -4,6 +4,9 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailsService } from '../services/movie-details.service';
 import { CommonModule } from '@angular/common';
+import { FavoriteColorService } from '../services/favorite-color.service';
+import { FavoriteServiceService } from '../services/favorite-service.service';
+import { Movie } from '../interface/movies';
 
 @Component({
   selector: 'app-moviedetails',
@@ -36,7 +39,8 @@ export class MoviedetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private detailsService: MovieDetailsService
+    private detailsService: MovieDetailsService,
+    private watchlistService : FavoriteServiceService, private color : FavoriteColorService
   ) {}
   details: any;
 
@@ -78,6 +82,8 @@ export class MoviedetailsComponent implements OnInit {
         );
       }
     });
+
+    this.watchlistService.getFavorite().subscribe(val => this.movieWatchList=val);
   }
 
   rating = 5;
@@ -86,6 +92,7 @@ export class MoviedetailsComponent implements OnInit {
     return `${current} out of ${max} hearts`;
   }
 
+  private movieWatchList! : Movie[];
   // to change color of the heart icon once added to the watch list and change it back when clicked again
   fillColor: string = '#000000';
 
@@ -96,5 +103,15 @@ export class MoviedetailsComponent implements OnInit {
   preventHeartClick(event: Event): void {
     // Prevent the click event from propagating to the card
     event.stopPropagation();
+    console.log(this.details);
+    if (!this.movieWatchList.some(m => m.id === this.details.id)) {
+      this.movieWatchList.push(this.details);
+      this.color.setFillColor("#ffe353");
+    } else {
+      this.movieWatchList = this.movieWatchList.filter(m => m.id !== this.details.id);
+      this.color.setFillColor("#000");
+    }
+
+    this.watchlistService.setFavorite(this.movieWatchList);
   }
 }
