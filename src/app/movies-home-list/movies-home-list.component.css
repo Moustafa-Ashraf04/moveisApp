@@ -13,12 +13,15 @@ button:hover {
   background-color: #ffe353;
 }
 h2 {
-    font-weight: 700;
+  font-weight: 700;
 }
 input {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 button {
   margin-left: 15px;
+}
+.pagination-gap {
+  margin-right: 8px;
 }

@@ -1,18 +1,26 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FavoriteServiceService } from '../services/favorite-service.service';
 import { Movie } from '../interface/movies';
 import { FavoriteColorService } from '../services/favorite-color.service';
+import { PercentScalePipe } from '../pipes/percent-scale.pipe';
 
 @Component({
   selector: 'app-movie-home-card',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterLink, RouterLinkActive],
   templateUrl: './movie-home-card.component.html',
   styleUrl: './movie-home-card.component.css',
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterLink,
+    RouterLinkActive,
+    DatePipe,
+    PercentScalePipe,
+  ],
 })
 export class MovieHomeCardComponent {
   @Input() movie!: Movie;
@@ -28,11 +36,14 @@ export class MovieHomeCardComponent {
 
   
 
-  // to change color of the heart icon once added to the watch list and change it back when clicked again
-  fillColor!: string;
 
-  changeFillColor(){
-    this.color.getFillColor().subscribe(val => this.fillColor=val)
+//     this.color.getFillColor().subscribe(val => this.fillColor=val)
+
+  // default color for the heart icon
+  fillColor: string = '#000000';
+  // changing color on click
+  changeFillColor(): void {
+    this.fillColor = this.fillColor === '#000000' ? '#ffe353' : '#000000';
   }
 
   preventHeartClick(event: Event): void {

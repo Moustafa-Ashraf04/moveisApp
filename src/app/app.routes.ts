@@ -16,14 +16,11 @@ export const routes: Routes = [
     component: WatchlistComponent,
     title: 'watchlist',
   },
-  // this is useless
-  // {
-  //   path: 'counter',
-  //   component: CounterComponent,
-  //   title: 'counter',
-  // },
-  { path: 'movie-details/:id', component: MoviedetailsComponent },
-
+  {
+    path: 'movie-details/:id',
+    component: MoviedetailsComponent,
+    title: 'movie details',
+  },
   {
     path: '**',
     component: NotFoundComponent,

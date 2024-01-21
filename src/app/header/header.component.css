@@ -7,9 +7,11 @@ svg {
 a {
   margin-left: 10px;
 }
-.navbar-brand {
-  margin-left: 12px;
-}
 .active_link {
   color: #86751f;
+}
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: row;
+  }
 }
