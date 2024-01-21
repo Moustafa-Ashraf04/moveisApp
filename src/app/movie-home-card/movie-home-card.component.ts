@@ -4,6 +4,9 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FavoriteServiceService } from '../services/favorite-service.service';
+import { Movie } from '../interface/movies';
+import { FavoriteColorService } from '../services/favorite-color.service';
 import { PercentScalePipe } from '../pipes/percent-scale.pipe';
 import { FavoriteServiceService } from '../services/favorite-service.service';
 import { FavoriteColorService } from '../services/favorite-color.service';
@@ -23,6 +26,7 @@ import { FavoriteColorService } from '../services/favorite-color.service';
   ],
 })
 export class MovieHomeCardComponent {
+  @Input() movie!: Movie;
   @Input() movie!: Movie;
 
   @Output() sendToParent = new EventEmitter<string>();

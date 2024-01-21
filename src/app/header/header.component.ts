@@ -4,6 +4,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FavoriteServiceService } from '../services/favorite-service.service';
 import { FavoriteColorService } from '../services/favorite-color.service';
 import { Movie } from '../interface/movies';
+import { FavoriteServiceService } from '../services/favorite-service.service';
+import { FavoriteColorService } from '../services/favorite-color.service';
+import { Movie } from '../interface/movies';
 
 @Component({
   selector: 'app-header',

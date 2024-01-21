@@ -5,6 +5,10 @@ import { EmptyWatchlistComponent } from '../empty-watchlist/empty-watchlist.comp
 import { Movie } from '../interface/movies';
 import { FavoriteServiceService } from '../services/favorite-service.service';
 import { MovieWatchlistCardComponent } from '../movie-watchlist-card/movie-watchlist-card.component';
+import { EmptyWatchlistComponent } from '../empty-watchlist/empty-watchlist.component';
+import { Movie } from '../interface/movies';
+import { FavoriteServiceService } from '../services/favorite-service.service';
+import { MovieWatchlistCardComponent } from '../movie-watchlist-card/movie-watchlist-card.component';
 
 @Component({
   selector: 'app-watchlist',
