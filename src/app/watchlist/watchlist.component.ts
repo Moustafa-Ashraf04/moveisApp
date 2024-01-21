@@ -10,5 +10,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './watchlist.component.css',
 })
 export class WatchlistComponent {
-  watchlistMovies: any[] = [];
+  watchlistMovies: string[] = [];
 }

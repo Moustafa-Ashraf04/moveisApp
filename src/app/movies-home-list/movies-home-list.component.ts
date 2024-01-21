@@ -1,10 +1,12 @@
+import { ApiResponseService } from './../services/api-response.service';
 import { Movie } from './../interface/movies';
+import { MovieApiResponse } from './../interface/movies';
 import { Component, Input, OnInit } from '@angular/core';
 import { MovieHomeCardComponent } from '../movie-home-card/movie-home-card.component';
 import { CommonModule } from '@angular/common';
-import { MoviesHomeListService } from '../services/movies-home-list.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-movies-home-list',
@@ -14,54 +16,28 @@ import { RouterModule, Routes } from '@angular/router';
     MovieHomeCardComponent,
     HttpClientModule,
     RouterModule,
+    NgbPaginationModule,
   ],
-  providers: [MoviesHomeListService],
+  providers: [ApiResponseService],
   templateUrl: './movies-home-list.component.html',
   styleUrl: './movies-home-list.component.css',
 })
 export class MoviesHomeListComponent implements OnInit {
-  moviesList: any;
-  // moviesList!: Movie[];
+  constructor(private apiResponse: ApiResponseService) {}
 
-  movie: any;
+  moviesList: Movie[] = [];
 
-  constructor(private moviesService: MoviesHomeListService) {}
+  // not used
+  // movie: any;
 
   ngOnInit() {
-    this.moviesService.getMoviesList().subscribe((res: any) => {
+    this.apiResponse.getMoviesList(this.page).subscribe((res: any) => {
       console.log(res);
       this.moviesList = res.results;
+      console.log(res.results);
     });
   }
 
-  // ###############  Previous tries ignore them ##########
-  // ngOnInit() {
-  //   this.moviesService.getMoviesList().subscribe(
-  //     (res: any) => {
-  //       this.moviesList = res.results; // Assuming the response has a 'results' property
-  //       // console.log(res.results[8].original_title);
-  //       console.log(res.results);
-  //       // showMovies(res.results);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching movies:', error);
-  //     }
-  //   );
-  // }
-
-  // function showMovies(data) {
-  //   data.array.forEach(movie => {
-  //     const movieEl = document.createElement("div")
-  //     movieEl.classList.add('movie')
-  //     movieEl.innerHTML = `
-
-  //     `
-  //   });
-  // }
-  // ngOnInit() {
-  //   this.moviesService
-  //     .getMoviesList()
-  //     .subscribe((res: any) => (this.moviesList = res.results));
-  //   console.log(this.movie);
-  // }
+  // initial value for the pagination bar
+  page = 4;
 }

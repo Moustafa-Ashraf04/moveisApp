@@ -1,25 +1,58 @@
 <!-- A single card layout to iterate through with the for loop  -->
-<div class="card my-3" [routerLink]="['/movie-details', movie.id]">
+<div
+  class="card my-3 cursor-pointer"
+  [routerLink]="['/movie-details', movie.id]"
+>
   <!-- movie poster  -->
   <div>
     <img
+      *ngIf="movie.poster_path"
       [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
       class="card-img-top"
-      alt="..."
+      alt="There is no poster to display"
+      style="position: relative; height: 100%"
+    />
+    <img
+      *ngIf="!movie.poster_path"
+      src="https://leodowelldesigns.com/wp-content/uploads/2021/12/coming-soon.jpg"
+      alt="Placeholder Image"
+      style="height: 422px; width: 100%"
     />
   </div>
   <!-- movie info  -->
   <div
     class="card-body d-flex flex-column align-items-start justify-content-between flex-grow-1"
-    style="min-height: 140px"
+    style="min-height: 152px"
+    (click)="preventHeartClick($event)"
   >
     <!-- movie title  -->
     <h5 class="card-title">
-      <a href="" class="nav-link">{{ movie.title }}</a>
+      <a class="nav-link">{{ movie.title }}</a>
     </h5>
     <!-- movie date and watchlist icon  -->
-    <div class="d-flex flex-grow-1 gap-5" id="dateandicon">
-      <p class="card-text">{{ movie.release_date }}</p>
+    <div
+      class="d-flex flex-grow-1 justify-content-between w-100"
+      id="dateandicon"
+    >
+      <span class="card-text"
+        >{{ movie.release_date | date }}
+        <p style="color: #429494" class="pt-1">
+          {{ movie.vote_average | percentScale }}
+          <svg
+            width="23"
+            height="23"
+            viewBox="0 0 23 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.0504 2.35231L15.0184 6.11684C15.288 6.63356 15.9835 7.13466 16.5631 7.21378L20.0122 7.72967C22.2206 8.05517 22.755 9.64043 21.2091 11.2516L18.5756 13.9807C18.136 14.438 17.8926 15.3246 18.0505 15.9406L18.8733 19.2455C19.5203 21.8547 18.1492 22.8978 15.8138 21.569L12.5514 19.7123C11.9573 19.3729 11.0003 19.3979 10.4265 19.7498L7.23347 21.712C4.94775 23.1144 3.5374 22.1229 4.09331 19.4948L4.80423 16.169C4.93698 15.5473 4.67419 14.6692 4.2168 14.2296L1.48776 11.5961C-0.113542 10.0448 0.364503 8.44266 2.55625 8.0366L5.97845 7.40502C6.55613 7.29363 7.23452 6.78238 7.48092 6.25182L9.31655 2.41349C10.304 0.34133 11.988 0.314945 13.0504 2.35231Z"
+              fill="#FFE353"
+            />
+          </svg>
+        </p>
+      </span>
+
       <a (click)="preventHeartClick($event)">
         <svg
           xmlns="http://www.w3.org/2000/svg"

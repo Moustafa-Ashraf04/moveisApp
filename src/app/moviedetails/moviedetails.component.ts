@@ -1,94 +1,89 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
-import { MovieDetailsService } from '../services/movie-details.service';
 import { CommonModule } from '@angular/common';
+import { MovieHomeCardComponent } from '../movie-home-card/movie-home-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiResponseService } from '../services/api-response.service';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { routes } from './../app.routes';
+import { Movie, MovieDetails } from './../interface/movies';
+import { PercentScalePipe } from '../pipes/percent-scale.pipe';
+import { RemoveDotPipe } from '../pipes/remove-dot.pipe';
 
 @Component({
   selector: 'app-moviedetails',
   standalone: true,
-  imports: [NgbRatingModule, HttpClientModule, CommonModule],
-  providers: [MovieDetailsService],
+  providers: [ApiResponseService],
   templateUrl: './moviedetails.component.html',
   styleUrl: './moviedetails.component.css',
-  styles: `
-			i {
-				position: relative;
-				display: inline-block;
-				font-size: 2.5rem;
-				padding-right: 0.1rem;
-				color: #d3d3d3;
-			}
-
-			.filled {
-				color: red;
-				overflow: hidden;
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-		`,
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    PercentScalePipe,
+    RemoveDotPipe,
+    MovieHomeCardComponent,
+    RouterModule,
+  ],
 })
 export class MoviedetailsComponent implements OnInit {
-  movieId: string | null = null;
-  // movieId: string;
-
   constructor(
     private route: ActivatedRoute,
-    private detailsService: MovieDetailsService
+    private apiResponse: ApiResponseService,
+    private router: Router
   ) {}
+
+  // ########
+  // not used
+  // id: any;
+  // movieId: string | null = null;
+  // $svg: any;
+  // times: any;
+  // res: any;
+  // moviesList: any;
+  // recommends: any;
+  // movieId: string;
+  // Movie: any;
+  // details: MovieDetails[] = [];
+  // ########
+
   details: any;
+  recommendations: Movie[] = [];
 
-  // ignore this for now
-  //
-  // ngOnInit(): void {
-  //   // // Subscribe to route parameter changes
-  //   // this.route.params.subscribe((params) => {
-  //   //   // Retrieve the movie ID from the route parameters
-  //   //   this.movieId = params['id'];
-  //   // });
-
-  //   // this.detailsService.getMovieDetails().subscribe((res: any) => {
-  //   //   console.log(res); // Check the structure of the API response
-  //   //   this.details = res;
-  //   // });
-  //   this.route.paramMap.subscribe((params) => {
-  //     const movieId = params.get('id');
-  //     // Now, use movieId to fetch details
-  //     this.detailsService
-  //       .getMovieDetails(movieId)
-  //       .subscribe((data) => (this.details = data));
-  //   });
-  // }
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      const movieId = params.get('id');
-      if (movieId) {
-        const numericMovieId = +movieId; // Convert to number
-        this.detailsService.getMovieDetails(numericMovieId).subscribe(
-          (data) => {
-            this.details = data;
-            // Additional logic to handle the fetched details
-          },
-          (error) => {
-            console.error('Error fetching movie details:', error);
-            // Handle error scenarios
-          }
-        );
-      }
-    });
+    // Extract movie ID from the URL
+    const movieIdParam = this.route.snapshot.paramMap.get('id');
+    // Check if movieIdParam is not null
+    if (movieIdParam !== null) {
+      // Convert movieIdParam to a number
+      const movieId = +movieIdParam;
+
+      // Call the first API
+      this.apiResponse.getMovieDetails(movieId).subscribe((details: any) => {
+        // Handle the details API response here
+        this.details = details;
+        console.log('Details:', details);
+      });
+
+      // Call the second API
+      this.apiResponse
+        .getMovieRecommends(movieId)
+        .subscribe((recommends: any) => {
+          // Handle the recommendations API response here
+          this.recommendations = recommends.results;
+          console.log('Recommendations:', recommends);
+        });
+    } else {
+      console.error('Invalid movie ID');
+    }
   }
 
-  rating = 5;
-
-  ariaValueText(current: number, max: number) {
-    return `${current} out of ${max} hearts`;
+  getFilledStarsCount(vote_average: number): number {
+    // Calculate the number of filled stars based on the rating
+    return Math.round((vote_average / 100) * 5);
   }
 
-  // to change color of the heart icon once added to the watch list and change it back when clicked again
+  // heart icon color black
   fillColor: string = '#000000';
-
+  //change its color on click
   changeFillColor(): void {
     this.fillColor = this.fillColor === '#000000' ? '#ffe353' : '#000000';
   }
@@ -96,5 +91,9 @@ export class MoviedetailsComponent implements OnInit {
   preventHeartClick(event: Event): void {
     // Prevent the click event from propagating to the card
     event.stopPropagation();
+  }
+
+  navigateToDetails(movieId: number): void {
+    this.router.navigate(['/movie-details', movieId]);
   }
 }

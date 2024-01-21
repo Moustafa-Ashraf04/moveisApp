@@ -1,9 +1,10 @@
 img {
   position: relative;
 }
-.card {
+.card,
+svg {
   cursor: pointer;
 }
-/* #dateandicon {
-  gap: 120px;
-} */
+.card-body {
+  cursor: default;
+}
