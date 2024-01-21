@@ -8,10 +8,8 @@ import { routes } from './../app.routes';
 import { Movie, MovieDetails } from './../interface/movies';
 import { PercentScalePipe } from '../pipes/percent-scale.pipe';
 import { RemoveDotPipe } from '../pipes/remove-dot.pipe';
-import { FavoriteColorService } from '../services/favorite-color.service';
 import { FavoriteServiceService } from '../services/favorite-service.service';
 import { FavoriteColorService } from '../services/favorite-color.service';
-import { FavoriteServiceService } from '../services/favorite-service.service';
 
 @Component({
   selector: 'app-moviedetails',
@@ -74,7 +72,6 @@ export class MoviedetailsComponent implements OnInit {
       .subscribe((val) => (this.movieWatchList = val));
   }
 
-  private movieWatchList! : Movie[];
   // to change color of the heart icon once added to the watch list and change it back when clicked again
   getFilledStarsCount(vote_average: number): number {
     // Calculate the number of filled stars based on the rating
