@@ -4,7 +4,6 @@ import { MovieHomeCardComponent } from '../movie-home-card/movie-home-card.compo
 import { HttpClientModule } from '@angular/common/http';
 import { ApiResponseService } from '../services/api-response.service';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { routes } from './../app.routes';
 import { Movie, MovieDetails } from './../interface/movies';
 import { PercentScalePipe } from '../pipes/percent-scale.pipe';
 import { RemoveDotPipe } from '../pipes/remove-dot.pipe';
@@ -55,28 +54,16 @@ export class MoviedetailsComponent implements OnInit {
       });
     });
 
-    // Call the first API
-    this.apiResponse.getMovieDetails(this.id).subscribe((details) => {
-      // Handle the details API response here
-      this.details = details;
-    });
-
-    // Call the second API
-    this.apiResponse.getMovieRecommends(this.id).subscribe((recommends) => {
-      // Handle the recommendations API response here
-      this.recommendations = recommends.results;
-    });
-
     this.watchlistService
       .getFavorite()
       .subscribe((val) => (this.movieWatchList = val));
   }
 
   // to change color of the heart icon once added to the watch list and change it back when clicked again
-  getFilledStarsCount(vote_average: number): number {
-    // Calculate the number of filled stars based on the rating
-    return Math.round((vote_average / 100) * 5);
-  }
+  // getFilledStarsCount(vote_average: number): number {
+  // Calculate the number of filled stars based on the rating
+  //   return Math.round((vote_average / 100) * 5);
+  // }
 
   // heart icon color black
   fillColor: string = '#000000';
@@ -101,8 +88,4 @@ export class MoviedetailsComponent implements OnInit {
 
     this.watchlistService.setFavorite(this.movieWatchList);
   }
-
-  // navigateToDetails(detailsId: number): void {
-  //   this.router.navigate([`/movie-details/ ${detailsId}`]);
-  // }
 }

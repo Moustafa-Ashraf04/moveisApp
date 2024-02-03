@@ -1,6 +1,6 @@
 <!-- A single card layout to iterate through with the for loop  -->
 <div
-  class="card my-3 cursor-pointer"
+  class="card my-3 cursor-pointer shadow-lg"
   [routerLink]="['/movie-details', movie.id]"
 >
   <!-- movie poster  -->
@@ -10,7 +10,7 @@
       [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
       class="card-img-top"
       alt="There is no poster to display"
-      style="position: relative; height: 100%"
+      style="height: 100%; min-height: 422px; max-height: 100%"
     />
     <img
       *ngIf="!movie.poster_path"
@@ -22,7 +22,7 @@
   <!-- movie info  -->
   <div
     class="card-body d-flex flex-column align-items-start justify-content-between flex-grow-1"
-    style="min-height: 152px"
+    style="min-height: 152px; max-height: 152px"
     (click)="preventHeartClick($event)"
   >
     <!-- movie title  -->

@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { ButtonModule } from 'primeng/button';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-movies-home-list',
@@ -17,6 +19,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     RouterModule,
     NgbPaginationModule,
+    ButtonModule,
+    PaginatorModule,
   ],
   providers: [ApiResponseService],
   templateUrl: './movies-home-list.component.html',
@@ -28,22 +32,26 @@ export class MoviesHomeListComponent implements OnInit {
   moviesList: Movie[] = [];
 
   ngOnInit() {
-    this.apiResponse.getMoviesList(this.page).subscribe((res: any) => {
-      console.log(res);
-      this.moviesList = res.results;
-      console.log(res.results);
-    });
+    this.apiResponse
+      .getMoviesList(this.page)
+      .subscribe((res: MovieApiResponse) => {
+        this.moviesList = res.results;
+      });
   }
 
-
-  // initial value for the pagination bar
   page: number = 1;
+  first: number = 0;
+  rows: number = 20;
 
-  changepage(newPage: number) {
-    this.apiResponse.getMoviesList(newPage).subscribe((res: any) => {
-      console.log(res);
-      this.moviesList = res.results;
-      console.log(res.results);
-    });
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+    this.page = event.page + 1;
+    this.apiResponse
+      .getMoviesList(this.page)
+      .subscribe((res: MovieApiResponse) => {
+        console.log(res);
+        this.moviesList = res.results;
+      });
   }
 }

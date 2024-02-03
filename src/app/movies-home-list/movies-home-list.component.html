@@ -1,6 +1,6 @@
 <div class="m-4 p-5" id="search-Container">
   <div>
-    <h2 class="mb-3">Welcome to our movie app</h2>
+    <h3 class="mb-3">Welcome to the Movies Library</h3>
     <p class="mb-3">
       Million of movies, TV shows and people to discover. Explore now.
     </p>
@@ -34,15 +34,13 @@
   </div>
 </div>
 
-<!-- ######   this is pagination bar only for display ####### 
--->
-<div class="d-flex flex-column align-items-center">
-  <ngb-pagination
-    [collectionSize]="400"
-    [(page)]="page"
-    [boundaryLinks]="true"
-    (click)="changepage(page)"
-  />
+<!-- ###### pagination bar ####### -->
 
-  <!-- <pre>Current page: {{ page }}</pre> -->
+<div class="flex justify-content-center mb-4">
+  <p-paginator
+    locale="en-US"
+    (onPageChange)="onPageChange($event)"
+    [rows]="rows"
+    [totalRecords]="10000"
+  ></p-paginator>
 </div>

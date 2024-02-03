@@ -96,15 +96,24 @@
             </ng-container>
           </span>
         </div>
-        <div class="my-4">
-          <a>
+        <!-- <p
+          class="fs-5 fw-bold mx-3"
+          *ngIf="
+            details.production_companies &&
+            details.production_companies.length > 0
+          "
+        >
+          Production companies:
+        </p> -->
+        <div class="my-4 mx-3">
+          <a
+            *ngFor="let company of details.production_companies.slice(0, 3)"
+            class="me-5"
+          >
             <img
-              [src]="
-                'https://image.tmdb.org/t/p/w500/' +
-                details.production_companies[0].logo_path
-              "
+              [src]="'https://image.tmdb.org/t/p/w500/' + company.logo_path"
               alt=""
-              style="max-width: 700px; max-height: 160px"
+              style="max-width: 250px; max-height: 120px"
             />
           </a>
         </div>
@@ -146,7 +155,7 @@
 </div>
 <hr class="mx-5" />
 
-<!-- here will be the recommendations part shows only 12 cards -->
+<!-- here will be the recommendations part shows only 16 cards -->
 
 <div class="m-4 mt-5">
   <h2 class="w-100">Recommendations</h2>
@@ -154,7 +163,7 @@
   <div class="row m-1 justify-content-center">
     <div
       class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12"
-      *ngFor="let movie of recommendations | slice : 0 : 12"
+      *ngFor="let movie of recommendations | slice : 0 : 16"
     >
       <app-movie-home-card [movie]="movie">
         <a [routerLink]="['/details', movie.id]"></a>
