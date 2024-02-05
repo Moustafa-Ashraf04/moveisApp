@@ -74,9 +74,14 @@
         id="buttonsthree"
         class="mb-3"
       >
-        <button *ngFor="let genre of details.genres" type="button" class="btn">
+        <P
+          *ngFor="let genre of details.genres"
+          class="rounded-5 me-3"
+          id="genre-button"
+          style="display: inline-block"
+        >
           {{ genre.name }}
-        </button>
+        </P>
       </div>
 
       <div class="d-flex align-items-between flex-column">
@@ -107,13 +112,13 @@
         </p> -->
         <div class="my-4 mx-3">
           <a
-            *ngFor="let company of details.production_companies.slice(0, 3)"
-            class="me-5"
+            *ngFor="let company of details.production_companies.slice(0, 4)"
+            class="me-4"
           >
             <img
               [src]="'https://image.tmdb.org/t/p/w500/' + company.logo_path"
               alt=""
-              style="max-width: 250px; max-height: 120px"
+              style="max-width: 200px; max-height: 100px"
             />
           </a>
         </div>
