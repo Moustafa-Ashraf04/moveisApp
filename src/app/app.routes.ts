@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: '/',
     component: MoviesHomeListComponent,
     title: 'Home',
   },
